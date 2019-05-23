@@ -1,0 +1,22 @@
+version: '3'
+services: 
+  db:
+    image: mongo
+    volumes:
+      - ./db:/data/db
+    redis:
+      image: redis
+    next:
+      build: ./next
+      env_file: ./next/.env
+    ooth:
+      build: ./ooth
+      env_file: ./ooth/.env
+    api:
+      build: ./api
+      env_file: ./api/.env
+    proxy:
+      build: ./proxy
+      env_file: ./proxy/.env
+      ports:
+        - '$PORT:8080'
